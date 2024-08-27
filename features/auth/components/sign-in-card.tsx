@@ -27,8 +27,12 @@ export const SignInCard = ({ setState }: SignInCardProps) => {
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [pending, setPending] = useState(false)
 
-  const handleProviderSignIn = (value: "google" | "github") => signIn(value)
+  const handleProviderSignIn = (value: "google" | "github") => {
+    setPending(true)
+    signIn(value).finally(() => setPending(false))
+  }
 
   return (
     <Card className="size-full p-8">
@@ -46,7 +50,7 @@ export const SignInCard = ({ setState }: SignInCardProps) => {
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            disabled={false}
+            disabled={pending}
           />
           <Input
             required
@@ -54,9 +58,9 @@ export const SignInCard = ({ setState }: SignInCardProps) => {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            disabled={false}
+            disabled={pending}
           />
-          <Button type="submit" className="w-full" size="lg" disabled={false}>
+          <Button type="submit" className="w-full" size="lg" disabled={pending}>
             Continue
           </Button>
         </form>
@@ -69,7 +73,7 @@ export const SignInCard = ({ setState }: SignInCardProps) => {
             variant="outline"
             className="relative w-full"
             onClick={() => handleProviderSignIn("google")}
-            disabled={false}
+            disabled={pending}
           >
             <FcGoogle className="absolute left-2.5 size-5" /> Continue with
             Google
@@ -79,7 +83,7 @@ export const SignInCard = ({ setState }: SignInCardProps) => {
             variant="outline"
             className="relative w-full"
             onClick={() => handleProviderSignIn("github")}
-            disabled={false}
+            disabled={pending}
           >
             <FaGithub className="absolute left-2.5 size-5" /> Continue with
             Github

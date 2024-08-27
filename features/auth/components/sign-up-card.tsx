@@ -1,3 +1,5 @@
+"use client"
+
 import { useState } from "react"
 import { FaGithub } from "react-icons/fa"
 import { FcGoogle } from "react-icons/fc"

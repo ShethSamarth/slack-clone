@@ -2,6 +2,8 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import { ConvexAuthNextjsServerProvider } from "@convex-dev/auth/nextjs/server"
 
+import { Modals } from "@/components/modals"
+import { Toaster } from "@/components/ui/sonner"
 import { ConvexClientProvider } from "@/components/convex-client-provider"
 
 import "./globals.css"
@@ -18,7 +20,11 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
     <ConvexAuthNextjsServerProvider>
       <html lang="en">
         <body className={inter.className}>
-          <ConvexClientProvider>{children}</ConvexClientProvider>
+          <ConvexClientProvider>
+            <Toaster richColors theme="light" position="bottom-center" />
+            <Modals />
+            {children}
+          </ConvexClientProvider>
         </body>
       </html>
     </ConvexAuthNextjsServerProvider>

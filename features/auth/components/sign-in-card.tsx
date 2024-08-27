@@ -1,8 +1,9 @@
 "use client"
 
-import { useState } from "react"
 import { FaGithub } from "react-icons/fa"
 import { FcGoogle } from "react-icons/fc"
+import { FormEvent, useState } from "react"
+import { TriangleAlert } from "lucide-react"
 import { useAuthActions } from "@convex-dev/auth/react"
 
 import {
@@ -27,7 +28,18 @@ export const SignInCard = ({ setState }: SignInCardProps) => {
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [error, setError] = useState("")
   const [pending, setPending] = useState(false)
+
+  const handleCredentialsSignIn = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    setPending(true)
+
+    signIn("password", { email, password, flow: "signIn" })
+      .catch(() => setError("Invalid email or password"))
+      .finally(() => setPending(false))
+  }
 
   const handleProviderSignIn = (value: "google" | "github") => {
     setPending(true)
@@ -42,8 +54,14 @@ export const SignInCard = ({ setState }: SignInCardProps) => {
           Use your email or another service to continue
         </CardDescription>
       </CardHeader>
+      {!!error && (
+        <div className="mb-6 flex items-center gap-x-2 rounded-md bg-destructive/15 p-3 text-sm text-destructive">
+          <TriangleAlert className="size-4 shrink-0" />
+          <p>{error}</p>
+        </div>
+      )}
       <CardContent className="space-y-5 px-0 pb-0">
-        <form className="space-y-2.5">
+        <form onSubmit={handleCredentialsSignIn} className="space-y-2.5">
           <Input
             required
             type="email"

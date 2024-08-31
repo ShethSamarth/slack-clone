@@ -4,6 +4,7 @@ import { ConvexAuthNextjsServerProvider } from "@convex-dev/auth/nextjs/server"
 
 import { Modals } from "@/components/modals"
 import { Toaster } from "@/components/ui/sonner"
+import { JotaiProvider } from "@/components/jotai-provider"
 import { ConvexClientProvider } from "@/components/convex-client-provider"
 
 import "./globals.css"
@@ -21,9 +22,11 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       <html lang="en">
         <body className={inter.className}>
           <ConvexClientProvider>
+            <JotaiProvider>
+              <Modals />
+              {children}
+            </JotaiProvider>
             <Toaster richColors theme="light" position="bottom-center" />
-            <Modals />
-            {children}
           </ConvexClientProvider>
         </body>
       </html>

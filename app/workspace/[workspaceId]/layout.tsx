@@ -6,7 +6,7 @@ import {
 
 import { Sidebar } from "./sidebar"
 import { Toolbar } from "./toolbar"
-import { WorkspaceSidebar } from "./wsorkspace-sidebar"
+import { WorkspaceSidebar } from "./workspace-sidebar"
 
 const WorkspaceIdLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -26,7 +26,9 @@ const WorkspaceIdLayout = ({ children }: { children: React.ReactNode }) => {
             <WorkspaceSidebar />
           </ResizablePanel>
           <ResizableHandle withHandle />
-          <ResizablePanel minSize={20}>{children}</ResizablePanel>
+          <ResizablePanel minSize={20} defaultSize={80}>
+            {children}
+          </ResizablePanel>
         </ResizablePanelGroup>
       </div>
     </div>

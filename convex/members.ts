@@ -39,7 +39,13 @@ export const get = query({
       if (user) members.push({ ...member, user })
     }
 
-    return members
+    const sortedMembers = members.sort((a, b) => {
+      if (a.user.name! < b.user.name!) return -1
+      if (a.user.name! < b.user.name!) return 1
+      return 0
+    })
+
+    return sortedMembers
   }
 })
 

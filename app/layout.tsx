@@ -26,8 +26,8 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
               <Modals />
               {children}
             </JotaiProvider>
-            <Toaster richColors theme="light" position="bottom-center" />
           </ConvexClientProvider>
+          <Toaster richColors theme="light" position="bottom-center" />
         </body>
       </html>
     </ConvexAuthNextjsServerProvider>

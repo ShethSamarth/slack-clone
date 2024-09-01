@@ -88,7 +88,7 @@ export const PreferencesModal = ({
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="overflow-hidden bg-gray-50 p-0">
           <DialogHeader className="border-b bg-white p-4">
-            <DialogTitle>{value}</DialogTitle>
+            <DialogTitle>{initialValue}</DialogTitle>
           </DialogHeader>
 
           <div className="flex flex-col gap-y-2 px-4 pb-4">
@@ -101,14 +101,14 @@ export const PreferencesModal = ({
                       Edit
                     </p>
                   </div>
-                  <p>{value}</p>
+                  <p>{initialValue}</p>
                 </div>
               </DialogTrigger>
               <DialogContent>
                 <DialogHeader>
                   <DialogTitle>Rename this workspace</DialogTitle>
                 </DialogHeader>
-                <form className="space-y-4" onSubmit={handleEdit}>
+                <form onSubmit={handleEdit} className="space-y-4">
                   <Input
                     required
                     autoFocus
@@ -120,6 +120,15 @@ export const PreferencesModal = ({
                     placeholder="Workspace name e.g. Work, Personal, Home"
                   />
                   <DialogFooter>
+                    <DialogClose asChild>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        disabled={isUpdatingWorkspace}
+                      >
+                        Cancel
+                      </Button>
+                    </DialogClose>
                     <Button type="submit" disabled={isUpdatingWorkspace}>
                       Save
                     </Button>

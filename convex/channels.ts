@@ -23,8 +23,8 @@ export const remove = mutation({
 
     if (!member || member.role !== "admin") throw new Error("Unauthorized")
 
-    await ctx.db.delete(args.id)
     // TODO: remove messages associated with channel
+    await ctx.db.delete(args.id)
 
     return args.id
   }

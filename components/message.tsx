@@ -7,6 +7,7 @@ import { Doc, Id } from "@/convex/_generated/dataModel"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 import { Hint } from "./hint"
+import { Toolbar } from "./toolbar"
 import { Thumbnail } from "./thumbnail"
 
 const Renderer = dynamic(() => import("@/components/renderer"), { ssr: false })
@@ -76,6 +77,17 @@ export const Message = ({
             )}
           </div>
         </div>
+        {!isEditing && (
+          <Toolbar
+            isAuthor={isAuthor}
+            isPending={false}
+            handleEdit={() => setEditingId(id)}
+            handleThread={() => {}}
+            handleDelete={() => {}}
+            handleReaction={() => {}}
+            hideThreadButton={hideThreadButton}
+          />
+        )}
       </div>
     )
   }
@@ -112,6 +124,17 @@ export const Message = ({
           )}
         </div>
       </div>
+      {!isEditing && (
+        <Toolbar
+          isAuthor={isAuthor}
+          isPending={false}
+          handleEdit={() => setEditingId(id)}
+          handleThread={() => {}}
+          handleDelete={() => {}}
+          handleReaction={() => {}}
+          hideThreadButton={hideThreadButton}
+        />
+      )}
     </div>
   )
 }

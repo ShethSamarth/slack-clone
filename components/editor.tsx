@@ -77,8 +77,6 @@ const Editor = ({
       modules: {
         toolbar: [
           ["bold", "italic", "underline", "strike"],
-          ["blockquote", "code-block"],
-          ["link"],
           [{ list: "ordered" }, { list: "bullet" }],
           [{ script: "sub" }, { script: "super" }],
           ["clean"]

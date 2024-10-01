@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { Loader } from "lucide-react"
 import { differenceInMinutes, format, isToday, isYesterday } from "date-fns"
 
 import { Id } from "@/convex/_generated/dataModel"
@@ -114,6 +115,29 @@ export const MessageList = ({
           })}
         </div>
       ))}
+      <div
+        className="h-1"
+        ref={(el) => {
+          if (el) {
+            const observer = new IntersectionObserver(
+              ([entry]) => {
+                if (entry.isIntersecting && canLoadMore) {
+                  loadMore()
+                }
+              },
+              { threshold: 1.0 }
+            )
+
+            observer.observe(el)
+            return () => observer.disconnect()
+          }
+        }}
+      />
+
+      {isLoadingMore && (
+        <Loader className="my-5 size-4 w-full animate-spin text-center" />
+      )}
+
       {variant === "channel" && channelName && channelCreationTime && (
         <ChannelHero name={channelName} creationTime={channelCreationTime} />
       )}

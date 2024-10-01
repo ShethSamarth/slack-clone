@@ -115,6 +115,7 @@ export const MessageList = ({
           })}
         </div>
       ))}
+
       <div
         className="h-1"
         ref={(el) => {

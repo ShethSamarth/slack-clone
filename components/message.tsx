@@ -5,6 +5,7 @@ import dynamic from "next/dynamic"
 import { format, isToday, isYesterday } from "date-fns"
 
 import { cn } from "@/lib/utils"
+import { usePanel } from "@/hooks/use-panel"
 import { useConfirm } from "@/hooks/use-confirm"
 import { Doc, Id } from "@/convex/_generated/dataModel"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -68,6 +69,8 @@ export const Message = ({
   threadImage,
   threadTimestamp
 }: MessageProps) => {
+  const { parentMessageId, onOpenMessage, onCloseMessage } = usePanel()
+
   const [ConfirmDialog, confirm] = useConfirm(
     "Delete message",
     "Are you sure you want to delete this message ? This cannot be undone."
@@ -114,7 +117,9 @@ export const Message = ({
         onSuccess: () => {
           toast.success("Message deleted")
 
-          // TODO: close thread if open
+          if (parentMessageId === id) {
+            onCloseMessage()
+          }
         },
         onError: () => toast.error("Failed to delete message")
       }
@@ -166,11 +171,11 @@ export const Message = ({
             <Toolbar
               isAuthor={isAuthor}
               isPending={isPending}
-              handleEdit={() => setEditingId(id)}
-              handleThread={() => {}}
               handleDelete={handleRemove}
               handleReaction={handleReaction}
+              handleEdit={() => setEditingId(id)}
               hideThreadButton={hideThreadButton}
+              handleThread={() => onOpenMessage(id)}
             />
           )}
         </div>
@@ -236,11 +241,11 @@ export const Message = ({
           <Toolbar
             isAuthor={isAuthor}
             isPending={isPending}
-            handleEdit={() => setEditingId(id)}
-            handleThread={() => {}}
             handleDelete={handleRemove}
             handleReaction={handleReaction}
+            handleEdit={() => setEditingId(id)}
             hideThreadButton={hideThreadButton}
+            handleThread={() => onOpenMessage(id)}
           />
         )}
       </div>

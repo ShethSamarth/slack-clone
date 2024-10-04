@@ -56,7 +56,7 @@ export const Reactions = ({ data, onChange }: ReactionsProps) => {
       ))}
       <EmojiPopover
         hint="Add reaction"
-        onEmojiSelect={(emoji) => onChange(emoji.native)}
+        onEmojiSelect={(emoji) => onChange(emoji)}
       >
         <button className="flex h-6 items-center gap-x-1 rounded-lg border border-transparent bg-slate-200/70 px-2.5 hover:border-slate-500">
           <MdOutlineAddReaction className="size-4" />

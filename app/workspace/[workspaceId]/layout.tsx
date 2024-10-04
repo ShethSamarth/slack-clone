@@ -10,15 +10,16 @@ import {
 import { usePanel } from "@/hooks/use-panel"
 import { Id } from "@/convex/_generated/dataModel"
 import { Thread } from "@/features/messages/components/thread"
+import { Profile } from "@/features/members/components/profile"
 
 import { Sidebar } from "./sidebar"
 import { Toolbar } from "./toolbar"
 import { WorkspaceSidebar } from "./workspace-sidebar"
 
 const WorkspaceIdLayout = ({ children }: { children: React.ReactNode }) => {
-  const { parentMessageId, onCloseMessage } = usePanel()
+  const { parentMessageId, profileMemberId, onClose } = usePanel()
 
-  const showPanel = !!parentMessageId
+  const showPanel = !!parentMessageId || !!profileMemberId
 
   return (
     <div className="h-full">
@@ -46,8 +47,13 @@ const WorkspaceIdLayout = ({ children }: { children: React.ReactNode }) => {
               <ResizablePanel minSize={20} defaultSize={30}>
                 {parentMessageId ? (
                   <Thread
-                    onClose={onCloseMessage}
+                    onClose={onClose}
                     messageId={parentMessageId as Id<"messages">}
+                  />
+                ) : profileMemberId ? (
+                  <Profile
+                    onClose={onClose}
+                    memberId={profileMemberId as Id<"members">}
                   />
                 ) : (
                   <div className="flex h-full items-center justify-center">

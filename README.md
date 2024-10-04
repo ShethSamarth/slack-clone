@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Slack Clone
 
-## Getting Started
+This is a repository for Slack Clone: Next.js 14, Convex, Convex-Auth, React, TailwindCSS, ShadCN UI.
 
-First, run the development server:
+Key Features:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Convex Database
+- Convex Auth Authentication
+- Google Auth
+- Github Auth
+- Realtime messages
+- Realtime reactions on messages
+- Message Threads
+- Workspace CRUD opreations
+- Workspace invitaion link + code
+- Channel CRUD opreations
+- Image upload
+- One-to-one conversations
+- ShadcnUI & TailwindCSS
+- Full mobile responsiveness
+
+# Final Version
+
+To visit the website, [click here.](https://slackclone-ss.vercel.app)
+
+### Cloning the repository
+
+```shell
+git clone https://github.com/ShethSamarth/slack-clone.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Setup .env file
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```js
+CONVEX_DEPLOYMENT=
+NEXT_PUBLIC_CONVEX_URL=
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Setup .env file for convex
 
-## Learn More
+```js
+AUTH_GITHUB_ID=
+AUTH_GITHUB_SECRET=
 
-To learn more about Next.js, take a look at the following resources:
+AUTH_GOOGLE_ID=
+AUTH_GOOGLE_SECRET=
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+JWKS=
+JWT_PRIVATE_KEY=
+SITE_URL=
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Install packages
 
-## Deploy on Vercel
+```shell
+bun install
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Start convex development server
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```shell
+bunx convex dev
+```
+
+### Start the app
+
+```shell
+bun run dev
+```

@@ -16,6 +16,7 @@ const populateThread = async (ctx: QueryCtx, messageId: Id<"messages">) => {
   if (messages.length === 0) {
     return {
       count: 0,
+      name: "",
       image: undefined,
       timestamp: 0
     }
@@ -27,6 +28,7 @@ const populateThread = async (ctx: QueryCtx, messageId: Id<"messages">) => {
   if (!lastMessageMember) {
     return {
       count: 0,
+      name: "",
       image: undefined,
       timestamp: 0
     }
@@ -36,6 +38,7 @@ const populateThread = async (ctx: QueryCtx, messageId: Id<"messages">) => {
 
   return {
     count: messages.length,
+    name: lastMessageUser?.name,
     image: lastMessageUser?.image,
     timestamp: lastMessage._creationTime
   }
@@ -274,6 +277,7 @@ export const get = query({
               user,
               reactions: reactionsWithoutMemberIdProperty,
               threadCount: thread.count,
+              threadName: thread.name,
               threadImage: thread.image,
               threadTimestamp: thread.timestamp
             }

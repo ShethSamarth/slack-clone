@@ -17,6 +17,7 @@ import { Hint } from "./hint"
 import { Toolbar } from "./toolbar"
 import { Thumbnail } from "./thumbnail"
 import { Reactions } from "./reactions"
+import { ThreadBar } from "./thread-bar"
 
 const Editor = dynamic(() => import("@/components/editor"), { ssr: false })
 const Renderer = dynamic(() => import("@/components/renderer"), { ssr: false })
@@ -46,6 +47,7 @@ interface MessageProps {
   setEditingId: (id: Id<"messages"> | null) => void
   hideThreadButton?: boolean
   threadCount?: number
+  threadName?: string
   threadImage?: string
   threadTimestamp?: number
 }
@@ -66,6 +68,7 @@ export const Message = ({
   setEditingId,
   hideThreadButton,
   threadCount,
+  threadName,
   threadImage,
   threadTimestamp
 }: MessageProps) => {
@@ -164,6 +167,13 @@ export const Message = ({
                   </span>
                 )}
                 <Reactions data={reactions} onChange={handleReaction} />
+                <ThreadBar
+                  count={threadCount}
+                  name={threadName}
+                  image={threadImage}
+                  timestamp={threadTimestamp}
+                  onClick={() => onOpenMessage(id)}
+                />
               </div>
             )}
           </div>
@@ -234,6 +244,13 @@ export const Message = ({
                 <span className="text-xs text-muted-foreground">(edited)</span>
               )}
               <Reactions data={reactions} onChange={handleReaction} />
+              <ThreadBar
+                count={threadCount}
+                name={threadName}
+                image={threadImage}
+                timestamp={threadTimestamp}
+                onClick={() => onOpenMessage(id)}
+              />
             </div>
           )}
         </div>
